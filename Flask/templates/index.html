@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cryptocurrency Listings</title>
+</head>
+<body>
+    <h1>Cryptocurrency Listings</h1>
+    <button id="fetchDataBtn">Fetch Data</button>
+    <div id="data"></div>
+
+    <script>
+        document.getElementById('fetchDataBtn').addEventListener('click', () => {
+            fetch('/get_data')
+                .then(response => response.json())
+                .then(data => {
+                    const dataDiv = document.getElementById('data');
+                    dataDiv.innerHTML = ''; // Clear previous data
+                    if (data.data && data.data.length > 0) {
+                        data.data.forEach((item) => {
+                            const elem = document.createElement('div');
+                            elem.textContent = `Name: ${item.name}, Symbol: ${item.symbol}, Price: ${item.quote.USD.price}`;
+                            dataDiv.appendChild(elem);
+                        });
+                    } else {
+                        dataDiv.textContent = 'No data found or error occurred.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('data').textContent = 'Error fetching data.';
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+title: Beginner's Guide to the CoinMarketCap API with Python (Tutorial)
+url: https://www.youtube.com/watch?v=f3GfkvfpVAE&t=330s
